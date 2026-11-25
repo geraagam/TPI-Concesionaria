@@ -9,7 +9,7 @@ Inteligencia Artificial Generativa (IAG) y Defensa Individual en Coloquio*.
 |---|---|
 | **Alumno** | Gamarra, Gerardo Andrés |
 | **Legajo** | 31300 |
-| **Comisión** | *(marcar: 2 / 3)* |
+| **Comisión** | Comision 1.3 |
 | **IAG seleccionada** | Anthropic Claude |
 
 > ⚠️ **Antes de entregar:** revisá que todo lo que figura acá coincida con tu experiencia
