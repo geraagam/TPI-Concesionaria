@@ -1,0 +1,18 @@
+# ---- Clases compiladas (se regeneran al compilar) ----
+build/
+*.class
+
+# ---- Archivos que genera BlueJ al abrir el proyecto ----
+*.ctxt
+package.bluej
+bluej.pkg
+bluej.pkh
+
+# ---- Material de estudio del grupo, no forma parte del proyecto ----
+GUIA-DE-DEFENSA.md
+PRACTICA-LIVE-CODING.md
+
+# ---- Sistema operativo ----
+Thumbs.db
+desktop.ini
+.DS_Store

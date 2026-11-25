@@ -1,0 +1,149 @@
+digraph UML {
+  rankdir=TB;
+  graph [fontname="Helvetica", fontsize=11, splines=polyline, nodesep=0.45, ranksep=0.75, bgcolor="white", compound=true];
+  node  [shape=plaintext, fontname="Helvetica", fontsize=10];
+  edge  [fontname="Helvetica", fontsize=9, color="#444444"];
+
+  /* ============ CAPA DE PRESENTACION ============ */
+  subgraph cluster_pres {
+    label="CAPA DE PRESENTACION  (concesionaria.presentacion)";
+    style="rounded,filled"; color="#90b4d8"; fillcolor="#eaf2fb"; fontsize=12; fontcolor="#1f4e79";
+
+    App [label=<<TABLE BORDER="1" COLOR="#1f4e79" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#cfe0f2"><B>App</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ ARCHIVO_STOCK : String {static final}<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ main(args : String[]) : void {static}<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    MenuConsola [label=<<TABLE BORDER="1" COLOR="#1f4e79" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#cfe0f2"><B>MenuConsola</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">- servicio : ServicioConcesionaria<BR ALIGN="LEFT"/>- lector : LectorConsola<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ iniciar() : void<BR ALIGN="LEFT"/>- registrarVehiculo() : void<BR ALIGN="LEFT"/>- listarTodo() : void<BR ALIGN="LEFT"/>- mostrarReporte() : void<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    LectorConsola [label=<<TABLE BORDER="1" COLOR="#1f4e79" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#cfe0f2"><B>LectorConsola</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">- scanner : Scanner<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ leerTexto(msg) : String<BR ALIGN="LEFT"/>+ leerEntero(msg,min,max) : Integer<BR ALIGN="LEFT"/>+ leerDecimal(msg,min) : Double<BR ALIGN="LEFT"/>+ leerSiNo(msg) : boolean<BR ALIGN="LEFT"/>+ &lt;E extends Enum&lt;E&gt;&gt; leerOpcionEnum(...) : E<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+  }
+
+  /* ============ CAPA DE NEGOCIO ============ */
+  subgraph cluster_neg {
+    label="CAPA DE NEGOCIO  (concesionaria.negocio)";
+    style="rounded,filled"; color="#8fbf8f"; fillcolor="#edf7ed"; fontsize=12; fontcolor="#2e6b2e";
+
+    Servicio [label=<<TABLE BORDER="1" COLOR="#2e6b2e" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#d6ecd6"><B>ServicioConcesionaria</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">- repositorio : Repositorio&lt;Vehiculo&gt;<BR ALIGN="LEFT"/>+ PRECIO_MINIMO : double {static final}<BR ALIGN="LEFT"/>+ KILOMETRAJE_MAXIMO : int {static final}<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ registrarVehiculo(v : Vehiculo) : void<BR ALIGN="LEFT"/>+ eliminarVehiculo(codigo) : void<BR ALIGN="LEFT"/>+ actualizarPrecio(codigo, precio) : void<BR ALIGN="LEFT"/>+ actualizarKilometraje(codigo, km) : void<BR ALIGN="LEFT"/>+ buscarPorCodigo(codigo) : Vehiculo<BR ALIGN="LEFT"/>+ buscarPorMarca(marca) : List&lt;Vehiculo&gt;<BR ALIGN="LEFT"/>+ filtrarPorEstado(e) : List&lt;Vehiculo&gt;<BR ALIGN="LEFT"/>+ filtrarPorTipo(tipo) : List&lt;Vehiculo&gt;<BR ALIGN="LEFT"/>+ calcularValorTotalStock() : double<BR ALIGN="LEFT"/>+ contarPorTipo() : Map&lt;String,Integer&gt;<BR ALIGN="LEFT"/>- validar(v : Vehiculo) : void<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+  }
+
+  /* ============ CAPA DE DATOS ============ */
+  subgraph cluster_dat {
+    label="CAPA DE DATOS  (concesionaria.datos)";
+    style="rounded,filled"; color="#d9a05b"; fillcolor="#fdf2e3"; fontsize=12; fontcolor="#8a5212";
+
+    IRepositorio [label=<<TABLE BORDER="1" COLOR="#8a5212" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#f7e2c3"><I>&#171;interface&#187;</I><BR/><B>Repositorio&lt;T extends Identificable&gt;</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ agregar(e : T) : boolean<BR ALIGN="LEFT"/>+ listarTodos() : List&lt;T&gt;<BR ALIGN="LEFT"/>+ buscarPorCodigo(codigo) : T<BR ALIGN="LEFT"/>+ eliminar(codigo) : boolean<BR ALIGN="LEFT"/>+ cantidad() : int<BR ALIGN="LEFT"/>+ cargar() : void<BR ALIGN="LEFT"/>+ guardar() : void<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    RepoArchivo [label=<<TABLE BORDER="1" COLOR="#8a5212" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#f7e2c3"><I>&#171;abstract&#187;</I><BR/><B>RepositorioEnArchivo&lt;T extends Identificable&gt;</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">- elementos : Map&lt;String, T&gt;<BR ALIGN="LEFT"/>- rutaArchivo : String<BR ALIGN="LEFT"/>+ SEPARADOR : String {static final}<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ agregar / listarTodos / buscar / eliminar<BR ALIGN="LEFT"/>+ cargar() : void<BR ALIGN="LEFT"/>+ guardar() : void<BR ALIGN="LEFT"/># convertirALinea(e : T) : String {abstract}<BR ALIGN="LEFT"/># convertirDesdeLinea(linea) : T {abstract}<BR ALIGN="LEFT"/># encabezadoArchivo() : String {abstract}<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    RepoVehiculo [label=<<TABLE BORDER="1" COLOR="#8a5212" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#f7e2c3"><B>RepositorioVehiculo</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT"># convertirALinea(v : Vehiculo) : String<BR ALIGN="LEFT"/># convertirDesdeLinea(linea) : Vehiculo<BR ALIGN="LEFT"/>- aEntero / aDecimal / aEstado / aCarroceria<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+  }
+
+  /* ============ MODELO DE DOMINIO ============ */
+  subgraph cluster_mod {
+    label="MODELO DE DOMINIO  (concesionaria.modelo)";
+    style="rounded,filled"; color="#a98fc4"; fillcolor="#f4eefa"; fontsize=12; fontcolor="#5b3e80";
+
+    Identificable [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#e4d8f0"><I>&#171;interface&#187;</I><BR/><B>Identificable</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ getCodigo() : String<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    Depreciable [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#e4d8f0"><I>&#171;interface&#187;</I><BR/><B>Depreciable</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ TOPE_DEPRECIACION : double = 0.70<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ porcentajeDepreciacionAnual() : double<BR ALIGN="LEFT"/>+ calcularValorActual() : double<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    Vehiculo [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#e4d8f0"><I>&#171;abstract&#187;</I><BR/><B>Vehiculo</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">- codigo : String<BR ALIGN="LEFT"/>- marca : String<BR ALIGN="LEFT"/>- modelo : String<BR ALIGN="LEFT"/>- anio : Integer<BR ALIGN="LEFT"/>- color : String<BR ALIGN="LEFT"/>- estado : EstadoVehiculo<BR ALIGN="LEFT"/>- kilometraje : Integer<BR ALIGN="LEFT"/>- precioBase : Double<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ getters / setters (JavaBean)<BR ALIGN="LEFT"/>+ calcularValorActual() : double<BR ALIGN="LEFT"/>+ getAntiguedad() : int<BR ALIGN="LEFT"/>+ esNuevo() : boolean<BR ALIGN="LEFT"/>+ equals(o : Object) : boolean<BR ALIGN="LEFT"/>+ hashCode() : int<BR ALIGN="LEFT"/>+ toString() : String<BR ALIGN="LEFT"/>+ getTipo() : String {abstract}<BR ALIGN="LEFT"/>+ getDetalleEspecifico() : String {abstract}<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    Automovil [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#e4d8f0"><B>Automovil</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">- carroceria : TipoCarroceria<BR ALIGN="LEFT"/>- cantidadPuertas : Integer<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ getTipo() : String<BR ALIGN="LEFT"/>+ getDetalleEspecifico() : String<BR ALIGN="LEFT"/>+ porcentajeDepreciacionAnual() : 0.10<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    Camioneta [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#e4d8f0"><B>Camioneta</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">- carroceria : TipoCarroceria<BR ALIGN="LEFT"/>- capacidadCargaKg : Double<BR ALIGN="LEFT"/>- traccionIntegral : Boolean<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ getTipo() : String<BR ALIGN="LEFT"/>+ getDetalleEspecifico() : String<BR ALIGN="LEFT"/>+ porcentajeDepreciacionAnual() : 0.08<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    Motocicleta [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#e4d8f0"><B>Motocicleta</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">- estilo : EstiloMoto<BR ALIGN="LEFT"/>- cilindrada : Integer<BR ALIGN="LEFT"/></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">+ getTipo() : String<BR ALIGN="LEFT"/>+ getDetalleEspecifico() : String<BR ALIGN="LEFT"/>+ porcentajeDepreciacionAnual() : 0.12<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    EstadoVehiculo [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#d8f0e4"><I>&#171;enumeration&#187;</I><BR/><B>EstadoVehiculo</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">NUEVO ("0 Km")<BR ALIGN="LEFT"/>USADO ("Usado")<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    TipoCarroceria [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#d8f0e4"><I>&#171;enumeration&#187;</I><BR/><B>TipoCarroceria</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">SEDAN, HATCHBACK, SUV,<BR ALIGN="LEFT"/>COUPE, FAMILIAR, PICKUP, FURGON<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+
+    EstiloMoto [label=<<TABLE BORDER="1" COLOR="#5b3e80" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white">
+      <TR><TD BGCOLOR="#d8f0e4"><I>&#171;enumeration&#187;</I><BR/><B>EstiloMoto</B></TD></TR><HR/>
+      <TR><TD ALIGN="LEFT">DEPORTIVA, NAKED, TOURING,<BR ALIGN="LEFT"/>ENDURO, SCOOTER, CHOPPER<BR ALIGN="LEFT"/></TD></TR></TABLE>>];
+  }
+
+  /* ============ EXCEPCIONES PROPIAS ============ */
+  subgraph cluster_exc {
+    label="EXCEPCIONES PROPIAS  (concesionaria.excepciones)";
+    style="rounded,filled"; color="#cc7f7f"; fillcolor="#fdeeee"; fontsize=12; fontcolor="#8b2f2f";
+
+    Exception [label=<<TABLE BORDER="1" COLOR="#8b2f2f" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="#f5f5f5">
+      <TR><TD><I>java.lang.Exception</I></TD></TR></TABLE>>];
+
+    ExcDato [label=<<TABLE BORDER="1" COLOR="#8b2f2f" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white"><TR><TD><B>DatoInvalidoException</B></TD></TR></TABLE>>];
+    ExcDup  [label=<<TABLE BORDER="1" COLOR="#8b2f2f" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white"><TR><TD><B>VehiculoDuplicadoException</B></TD></TR></TABLE>>];
+    ExcNoEnc[label=<<TABLE BORDER="1" COLOR="#8b2f2f" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white"><TR><TD><B>VehiculoNoEncontradoException</B></TD></TR></TABLE>>];
+    ExcPers [label=<<TABLE BORDER="1" COLOR="#8b2f2f" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="white"><TR><TD><B>PersistenciaException</B></TD></TR></TABLE>>];
+  }
+
+  /* ---------- HERENCIA (triangulo vacio, linea llena) ---------- */
+  edge [dir=back, arrowtail=empty, arrowhead=none, style=solid, color="#333333"];
+  Vehiculo    -> Automovil;
+  Vehiculo    -> Camioneta;
+  Vehiculo    -> Motocicleta;
+  RepoArchivo -> RepoVehiculo;
+  Exception   -> ExcDato;
+  Exception   -> ExcDup;
+  Exception   -> ExcNoEnc;
+  Exception   -> ExcPers;
+
+  /* ---------- REALIZACION / IMPLEMENTS (triangulo vacio, linea punteada) ---------- */
+  edge [dir=back, arrowtail=empty, arrowhead=none, style=dashed, color="#333333"];
+  Identificable -> Vehiculo;
+  Depreciable   -> Vehiculo;
+  IRepositorio  -> RepoArchivo;
+
+  /* ---------- ASOCIACIONES / DEPENDENCIAS ---------- */
+  edge [dir=forward, arrowtail=none, arrowhead=vee, style=solid, color="#1f4e79", fontcolor="#1f4e79"];
+  MenuConsola -> Servicio      [label=" usa"];
+  MenuConsola -> LectorConsola [label=" compone", arrowhead=vee];
+  Servicio    -> IRepositorio  [label=" depende de\n la interfaz", color="#2e6b2e", fontcolor="#2e6b2e"];
+  RepoVehiculo-> Vehiculo      [label=" crea", color="#8a5212", fontcolor="#8a5212", style=dashed];
+  Vehiculo    -> EstadoVehiculo[label=" ", color="#5b3e80"];
+  Automovil   -> TipoCarroceria[label=" ", color="#5b3e80"];
+  Camioneta   -> TipoCarroceria[label=" ", color="#5b3e80"];
+  Motocicleta -> EstiloMoto    [label=" ", color="#5b3e80"];
+  App         -> MenuConsola   [label=" arma", style=dashed];
+  App         -> Servicio      [label=" arma", style=dashed];
+  App         -> RepoVehiculo  [label=" arma", style=dashed];
+}
