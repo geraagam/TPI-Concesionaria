@@ -193,12 +193,6 @@ public abstract class RepositorioEnArchivo<T extends Identificable> implements R
         }
     }
 
-    /**
-     * Escribe toda la coleccion en el archivo, reemplazando el contenido
-     * anterior.
-     *
-     * @throws PersistenciaException si no se puede escribir
-     */
     @Override
     public void guardar() throws PersistenciaException {
         PrintWriter escritor = null;
