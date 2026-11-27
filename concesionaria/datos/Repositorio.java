@@ -9,7 +9,7 @@ public interface Repositorio<T extends Identificable> {
 
     boolean agregar(T elemento);
 
-    List<T> listarTodos();
+    List<T> listarTodos(); 
 
     T buscarPorCodigo(String codigo);
 
@@ -20,4 +20,14 @@ public interface Repositorio<T extends Identificable> {
     void cargar() throws PersistenciaException;
 
     void guardar() throws PersistenciaException;
+    
+     /**
+     * Indica si ya existe un elemento con ese codigo.
+     *
+     * @param codigo codigo a verificar
+     * @return true si el codigo ya esta en uso
+     */
+    default boolean existe(String codigo) {
+        return buscarPorCodigo(codigo) != null;
+    }
 }
