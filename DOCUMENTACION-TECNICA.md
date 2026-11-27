@@ -15,7 +15,7 @@
 | Apellido y nombre | Legajo | Responsabilidad principal |
 |---|---|---|
 | Gamarra, Gerardo Andrés | 31300 | *(completar)* |
-| *(completar)* | | |
+| Mierez, Antonella Belen | 31270| *antomierez*|
 | *(completar)* | | |
 
 ---
