@@ -9,7 +9,14 @@ Inteligencia Artificial Generativa (IAG) y Defensa Individual en Coloquio*.
 |---|---|
 | **Alumno** | Gamarra, Gerardo Andrés |
 | **Legajo** | 31300 |
-| **Comisión** | Comision 1.3 |
+| **Comisión** | Comision 1.2 |
+
+| | |
+|---|---|
+| **Alumno** | Mierez, Antonella Belen |
+| **Legajo** | 31270 |
+| **Comisión** | Comision 1.2 |
+
 | **IAG seleccionada** | Anthropic Claude |
 
 ---
