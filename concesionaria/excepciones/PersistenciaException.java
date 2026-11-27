@@ -7,7 +7,7 @@ package concesionaria.excepciones;
  *
  * De esta forma la capa de negocio y el menu no necesitan conocer IOException
  * ni nada de java.io: solo saben que "fallo la persistencia". Eso es
- * desacoplar las capas.
+ * desacoplar las capas
  *
  * @author Grupo TFI - Programacion II
  * @version 1.0
