@@ -35,18 +35,10 @@ public class MenuConsola {
     private final ServicioConcesionaria servicio;
     private final LectorConsola lector;
 
-    /**
-     * @param servicio capa de negocio que resuelve las operaciones
-     */
     public MenuConsola(ServicioConcesionaria servicio) {
         this.servicio = servicio;
         this.lector = new LectorConsola();
     }
-
-    /**
-     * Arranca el ciclo principal del programa: muestra el menu una y otra vez
-     * hasta que el usuario elige salir.
-     */
     public void iniciar() {
         mostrarBienvenida();
         int opcion;
@@ -59,12 +51,6 @@ public class MenuConsola {
 
         lector.cerrar();
     }
-
-    /**
-     * Deriva la opcion elegida al metodo que corresponde.
-     *
-     * @param opcion numero elegido en el menu
-     */
     private void ejecutarOpcion(int opcion) {
         switch (opcion) {
             case 1:
@@ -106,14 +92,6 @@ public class MenuConsola {
         }
     }
 
-    // ------------------------------------------------------------------
-    // Opciones del menu
-    // ------------------------------------------------------------------
-
-    /**
-     * Alta de una unidad: pide el tipo, los datos comunes y los propios del
-     * tipo elegido, arma el objeto y se lo entrega al negocio.
-     */
     private void registrarVehiculo() {
         System.out.println("  === ALTA DE UNIDAD ===");
         System.out.println("  Tipo de vehiculo:");
@@ -169,8 +147,6 @@ public class MenuConsola {
                     kilometraje, precio, estilo, cilindrada);
         }
 
-        // Aca se ve el tratamiento de las excepciones propias: el negocio
-        // avisa que paso y la consola lo traduce en un mensaje para el usuario.
         try {
             servicio.registrarVehiculo(vehiculo);
             System.out.println("\n  [OK] Unidad registrada y guardada:");
@@ -184,18 +160,11 @@ public class MenuConsola {
         }
         lector.esperarEnter();
     }
-
-    /**
-     * Muestra todas las unidades del stock.
-     */
     private void listarTodo() {
         imprimirListado("STOCK COMPLETO", servicio.listarTodos());
         lector.esperarEnter();
     }
 
-    /**
-     * Busca una unidad por su codigo exacto.
-     */
     private void buscarPorCodigo() {
         String codigo = lector.leerTexto("  Codigo a buscar: ");
         try {
@@ -212,20 +181,12 @@ public class MenuConsola {
         }
         lector.esperarEnter();
     }
-
-    /**
-     * Busca unidades cuya marca contenga el texto ingresado.
-     */
     private void buscarPorMarca() {
         String marca = lector.leerTexto("  Marca a buscar: ");
         imprimirListado("RESULTADOS PARA LA MARCA '" + marca.toUpperCase() + "'",
                 servicio.buscarPorMarca(marca));
         lector.esperarEnter();
     }
-
-    /**
-     * Filtra el stock por tipo de vehiculo.
-     */
     private void filtrarPorTipo() {
         System.out.println("  Tipo a listar:");
         System.out.println("    1) Automovil");
@@ -243,9 +204,6 @@ public class MenuConsola {
         lector.esperarEnter();
     }
 
-    /**
-     * Filtra el stock por estado (0 Km o usados).
-     */
     private void filtrarPorEstado() {
         EstadoVehiculo estado = lector.leerOpcionEnum("  Estado a listar:",
                 EstadoVehiculo.values());
@@ -253,10 +211,6 @@ public class MenuConsola {
                 servicio.filtrarPorEstado(estado));
         lector.esperarEnter();
     }
-
-    /**
-     * Cambia el precio de lista de una unidad.
-     */
     private void actualizarPrecio() {
         String codigo = lector.leerTexto("  Codigo de la unidad: ");
         Double precio = lector.leerDecimal("  Nuevo precio de lista: $ ",
@@ -273,10 +227,6 @@ public class MenuConsola {
         }
         lector.esperarEnter();
     }
-
-    /**
-     * Cambia el kilometraje de una unidad usada.
-     */
     private void actualizarKilometraje() {
         String codigo = lector.leerTexto("  Codigo de la unidad: ");
         Integer kilometraje = lector.leerEntero("  Nuevo kilometraje: ", 0,
@@ -293,10 +243,6 @@ public class MenuConsola {
         }
         lector.esperarEnter();
     }
-
-    /**
-     * Da de baja una unidad del stock, pidiendo confirmacion.
-     */
     private void eliminarVehiculo() {
         String codigo = lector.leerTexto("  Codigo de la unidad a eliminar: ");
         try {
@@ -315,10 +261,6 @@ public class MenuConsola {
         }
         lector.esperarEnter();
     }
-
-    /**
-     * Reporte de valorizacion: cantidad por tipo y valor total del stock.
-     */
     private void mostrarReporte() {
         System.out.println("  === REPORTE DE VALORIZACION DEL STOCK ===\n");
         System.out.println("  Unidades en stock: " + servicio.cantidadEnStock());
@@ -344,13 +286,6 @@ public class MenuConsola {
     // ------------------------------------------------------------------
     // Utilidades de presentacion
     // ------------------------------------------------------------------
-
-    /**
-     * Imprime una lista de unidades con formato de tabla.
-     *
-     * @param titulo titulo del listado
-     * @param lista  unidades a mostrar
-     */
     private void imprimirListado(String titulo, List<Vehiculo> lista) {
         System.out.println("  === " + titulo + " ===\n");
         if (lista.isEmpty()) {
@@ -363,28 +298,15 @@ public class MenuConsola {
         System.out.println(LINEA);
         double total = 0.0;
         for (Vehiculo vehiculo : lista) {
-            // Una sola linea imprime los tres tipos de vehiculo: el toString()
-            // que se ejecuta es el que corresponde al objeto real.
             System.out.println("  " + vehiculo);
             total += vehiculo.calcularValorActual();
         }
         System.out.println(LINEA);
         System.out.println("  " + lista.size() + " unidad(es) - valor actual del listado: " + pesos(total));
     }
-
-    /**
-     * Formatea un importe en pesos.
-     *
-     * @param importe valor a formatear
-     * @return importe con separador de miles y dos decimales
-     */
     private String pesos(double importe) {
         return String.format("$ %,.2f", Double.valueOf(importe));
     }
-
-    /**
-     * Cartel de bienvenida.
-     */
     private void mostrarBienvenida() {
         System.out.println();
         System.out.println("  ############################################################");
@@ -393,10 +315,6 @@ public class MenuConsola {
         System.out.println("  ############################################################");
         System.out.println("  Unidades cargadas desde el archivo: " + servicio.cantidadEnStock());
     }
-
-    /**
-     * Menu principal.
-     */
     private void mostrarMenu() {
         System.out.println();
         System.out.println("  ==================== MENU PRINCIPAL ====================");

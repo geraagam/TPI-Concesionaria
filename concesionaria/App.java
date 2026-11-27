@@ -18,22 +18,10 @@ import concesionaria.presentacion.MenuConsola;
  * @version 1.0
  */
 public class App {
-
-    /**
-     * Constructor por defecto. Esta clase solo se usa para arrancar el
-     * programa desde su metodo main.
-     */
     public App() {
     }
 
-    /** Archivo donde se persiste el stock entre una ejecucion y otra. */
     public static final String ARCHIVO_STOCK = "stock.csv";
-
-    /**
-     * Arranca la aplicacion.
-     *
-     * @param args no se utilizan
-     */
     public static void main(String[] args) {
 
         // 1) Capa de datos.

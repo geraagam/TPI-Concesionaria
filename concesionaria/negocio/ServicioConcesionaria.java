@@ -15,35 +15,18 @@ import concesionaria.modelo.Vehiculo;
 
 /**
  * CAPA DE NEGOCIO.
- *
- * Aca viven las reglas de la concesionaria: que se puede cargar, que no, y
- * como se calculan los reportes. Esta clase no imprime nada por pantalla ni
- * lee nada del teclado (eso es tarea del menu), y tampoco sabe si los datos
- * terminan en un archivo o en una base (eso es tarea del repositorio).
- *
- * Esa division es el esquema "Diseno vs. Negocio" que pide el enunciado.
- *
  * @author Grupo TFI - Programacion II
  * @version 1.0
  */
 public class ServicioConcesionaria {
 
-    /** Precio minimo aceptado para una unidad. */
     public static final double PRECIO_MINIMO = 1.0;
 
     /** Kilometraje maximo razonable para una unidad usada. */
     public static final int KILOMETRAJE_MAXIMO = 1000000;
 
-    /**
-     * Se declara del tipo de la INTERFAZ, no de la clase concreta.
-     * Asi el servicio funciona con cualquier repositorio que cumpla el
-     * contrato (archivo, base de datos, memoria) sin cambiar una linea.
-     */
     private final Repositorio<Vehiculo> repositorio;
 
-    /**
-     * @param repositorio repositorio donde se almacenan los vehiculos
-     */
     public ServicioConcesionaria(Repositorio<Vehiculo> repositorio) {
         this.repositorio = repositorio;
     }
@@ -51,15 +34,6 @@ public class ServicioConcesionaria {
     // ------------------------------------------------------------------
     // Altas, bajas y modificaciones
     // ------------------------------------------------------------------
-
-    /**
-     * Registra una unidad nueva en el stock.
-     *
-     * @param vehiculo vehiculo a registrar
-     * @throws DatoInvalidoException        si algun dato rompe las reglas del negocio
-     * @throws VehiculoDuplicadoException   si el codigo ya esta en uso
-     * @throws PersistenciaException        si no se pudo guardar el archivo
-     */
     public void registrarVehiculo(Vehiculo vehiculo)
             throws DatoInvalidoException, VehiculoDuplicadoException, PersistenciaException {
 
@@ -69,18 +43,8 @@ public class ServicioConcesionaria {
             throw new VehiculoDuplicadoException(
                     "Ya existe un vehiculo registrado con el codigo " + vehiculo.getCodigo());
         }
-        // Se persiste enseguida para que el dato sobreviva aunque el programa
-        // se cierre de manera inesperada.
         repositorio.guardar();
     }
-
-    /**
-     * Elimina una unidad del stock.
-     *
-     * @param codigo codigo de la unidad
-     * @throws VehiculoNoEncontradoException si no existe esa unidad
-     * @throws PersistenciaException         si no se pudo guardar el archivo
-     */
     public void eliminarVehiculo(String codigo)
             throws VehiculoNoEncontradoException, PersistenciaException {
 
@@ -90,16 +54,6 @@ public class ServicioConcesionaria {
         }
         repositorio.guardar();
     }
-
-    /**
-     * Actualiza el precio de lista de una unidad.
-     *
-     * @param codigo      codigo de la unidad
-     * @param nuevoPrecio nuevo precio de lista
-     * @throws VehiculoNoEncontradoException si no existe esa unidad
-     * @throws DatoInvalidoException         si el precio no es valido
-     * @throws PersistenciaException         si no se pudo guardar el archivo
-     */
     public void actualizarPrecio(String codigo, Double nuevoPrecio)
             throws VehiculoNoEncontradoException, DatoInvalidoException, PersistenciaException {
 
@@ -110,16 +64,6 @@ public class ServicioConcesionaria {
         vehiculo.setPrecioBase(nuevoPrecio);
         repositorio.guardar();
     }
-
-    /**
-     * Actualiza el kilometraje de una unidad usada.
-     *
-     * @param codigo          codigo de la unidad
-     * @param nuevoKilometraje nuevo kilometraje
-     * @throws VehiculoNoEncontradoException si no existe esa unidad
-     * @throws DatoInvalidoException         si el kilometraje no es valido o la unidad es 0 Km
-     * @throws PersistenciaException         si no se pudo guardar el archivo
-     */
     public void actualizarKilometraje(String codigo, Integer nuevoKilometraje)
             throws VehiculoNoEncontradoException, DatoInvalidoException, PersistenciaException {
 
@@ -140,19 +84,9 @@ public class ServicioConcesionaria {
     // ------------------------------------------------------------------
     // Consultas
     // ------------------------------------------------------------------
-
-    /**
-     * @return todas las unidades del stock
-     */
     public List<Vehiculo> listarTodos() {
         return repositorio.listarTodos();
     }
-
-    /**
-     * @param codigo codigo buscado
-     * @return la unidad encontrada
-     * @throws VehiculoNoEncontradoException si no existe esa unidad
-     */
     public Vehiculo buscarPorCodigo(String codigo) throws VehiculoNoEncontradoException {
         Vehiculo vehiculo = repositorio.buscarPorCodigo(codigo);
         if (vehiculo == null) {
@@ -161,13 +95,6 @@ public class ServicioConcesionaria {
         }
         return vehiculo;
     }
-
-    /**
-     * Busca por marca aproximada, sin distinguir mayusculas.
-     *
-     * @param marca texto a buscar dentro de la marca
-     * @return lista de unidades que coinciden
-     */
     public List<Vehiculo> buscarPorMarca(String marca) {
         List<Vehiculo> resultado = new ArrayList<Vehiculo>();
         if (marca == null) {
@@ -182,11 +109,6 @@ public class ServicioConcesionaria {
         }
         return resultado;
     }
-
-    /**
-     * @param estado estado buscado (NUEVO o USADO)
-     * @return unidades en ese estado
-     */
     public List<Vehiculo> filtrarPorEstado(EstadoVehiculo estado) {
         List<Vehiculo> resultado = new ArrayList<Vehiculo>();
         for (Vehiculo vehiculo : repositorio.listarTodos()) {
@@ -196,14 +118,6 @@ public class ServicioConcesionaria {
         }
         return resultado;
     }
-
-    /**
-     * Filtra por tipo de vehiculo aprovechando el polimorfismo: se le pregunta
-     * a cada objeto que tipo es, sin preguntar por su clase.
-     *
-     * @param tipo "Automovil", "Camioneta" o "Motocicleta"
-     * @return unidades de ese tipo
-     */
     public List<Vehiculo> filtrarPorTipo(String tipo) {
         List<Vehiculo> resultado = new ArrayList<Vehiculo>();
         if (tipo == null) {
@@ -220,16 +134,6 @@ public class ServicioConcesionaria {
     // ------------------------------------------------------------------
     // Reportes
     // ------------------------------------------------------------------
-
-    /**
-     * Suma el valor actual de todo el stock.
-     *
-     * Es el ejemplo mas claro de polimorfismo del sistema: el metodo recorre
-     * una lista de Vehiculo y llama siempre a calcularValorActual(), pero cada
-     * objeto aplica su propio porcentaje de depreciacion.
-     *
-     * @return valor total del stock en pesos
-     */
     public double calcularValorTotalStock() {
         double total = 0.0;
         for (Vehiculo vehiculo : repositorio.listarTodos()) {
@@ -237,12 +141,6 @@ public class ServicioConcesionaria {
         }
         return total;
     }
-
-    /**
-     * Cuenta cuantas unidades hay de cada tipo.
-     *
-     * @return mapa con el tipo como clave y la cantidad como valor
-     */
     public Map<String, Integer> contarPorTipo() {
         Map<String, Integer> conteo = new LinkedHashMap<String, Integer>();
         for (Vehiculo vehiculo : repositorio.listarTodos()) {
@@ -256,19 +154,9 @@ public class ServicioConcesionaria {
         }
         return conteo;
     }
-
-    /**
-     * @return cantidad total de unidades en stock
-     */
     public int cantidadEnStock() {
         return repositorio.cantidad();
     }
-
-    /**
-     * Propone el proximo codigo libre con el formato V001, V002, etc.
-     *
-     * @return codigo sugerido
-     */
     public String generarCodigoSugerido() {
         int maximo = 0;
         for (Vehiculo vehiculo : repositorio.listarTodos()) {
@@ -291,17 +179,6 @@ public class ServicioConcesionaria {
     // ------------------------------------------------------------------
     // Reglas de validacion del negocio
     // ------------------------------------------------------------------
-
-    /**
-     * Controla que la unidad cumpla todas las reglas antes de registrarla.
-     *
-     * Las validaciones viven aca y no en los setters para que el modelo quede
-     * como un JavaBean puro y para que las reglas esten todas juntas en un
-     * solo lugar.
-     *
-     * @param vehiculo vehiculo a validar
-     * @throws DatoInvalidoException si alguna regla no se cumple
-     */
     private void validar(Vehiculo vehiculo) throws DatoInvalidoException {
         if (vehiculo == null) {
             throw new DatoInvalidoException("No se recibio ningun vehiculo.");
@@ -330,21 +207,12 @@ public class ServicioConcesionaria {
             throw new DatoInvalidoException(
                     "El kilometraje debe estar entre 0 y " + KILOMETRAJE_MAXIMO + ".");
         }
-        // Regla propia del negocio: una unidad 0 Km no puede tener kilometros.
+
         if (vehiculo.esNuevo() && vehiculo.getKilometraje().intValue() != 0) {
             throw new DatoInvalidoException(
                     "Una unidad 0 Km no puede tener kilometraje recorrido.");
         }
     }
-
-    /**
-     * Controla que un texto obligatorio no venga vacio ni con el separador
-     * del archivo adentro (romperia la persistencia).
-     *
-     * @param valor texto a controlar
-     * @param campo nombre del campo, para el mensaje
-     * @throws DatoInvalidoException si el texto no sirve
-     */
     private void exigirTexto(String valor, String campo) throws DatoInvalidoException {
         if (valor == null || valor.trim().length() == 0) {
             throw new DatoInvalidoException("El campo " + campo + " no puede quedar vacio.");

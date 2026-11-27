@@ -26,7 +26,7 @@ public class Automovil extends Vehiculo {
     /**
      * Constructor completo.
      *
-     * @param codigo          identificador unico de stock
+     *  codigo          identificador unico de stock
      * @param marca           marca del automovil
      * @param modelo          modelo del automovil
      * @param anio            anio de fabricacion

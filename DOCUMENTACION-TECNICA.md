@@ -16,7 +16,7 @@
 |---|---|---|
 | Gamarra, Gerardo Andrés | 31300 | *(completar)* |
 | *(completar)* | | |
-| *(completar)* | | |
+| Aquino, Leandro Miguel| | |
 
 ---
 
