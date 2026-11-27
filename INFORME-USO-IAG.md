@@ -229,6 +229,10 @@ capacidad de generarlo.
 ## 5. Valoración crítica personal de la experiencia
 
 *(Punto 3.e de la guía.)*
+VALORACION PERSONAL: Mierez Antonella Belén
+Trabajar con IA fue una experiencia muy útil, porque nos ayudó a resolver dudas, desarrollar funciones y avanzar con el proyecto. Pero también aprendí que no se trata solamente de pedirle un código y copiarlo. Si uno no entiende lo que está haciendo, no tiene mucho sentido, porque después tampoco va a poder explicarlo ni defenderlo.
+También considero que es importante saber cómo pedirle las cosas, es decir, aprender a escribir buenos prompts y explicar claramente qué queremos lograr. En nuestro caso, Claude fue una herramienta muy intuitiva y nos facilitó bastante el trabajo, pero entendí que la IA tiene que adaptarse a lo que nosotros necesitamos y no al revés. Al final, somos nosotros quienes tenemos que revisar, comprender y hacer propio el trabajo.
+
 
 
 
