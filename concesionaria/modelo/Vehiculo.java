@@ -1,5 +1,7 @@
 package concesionaria.modelo;
 
+import java.io.Serializable;
+
 /**
  * Clase abstracta que representa a cualquier vehiculo del stock de la
  * concesionaria. Es la ABSTRACCION del dominio: reune todo lo que tienen en
@@ -25,7 +27,9 @@ package concesionaria.modelo;
  * @author Grupo TFI - Programacion II
  * @version 1.0
  */
-public abstract class Vehiculo implements Identificable, Depreciable {
+public abstract class Vehiculo implements Serializable, Identificable, Depreciable {
+
+    private static final long serialVersionUID = 1L;
 
     /** Anio mas antiguo que la concesionaria acepta recibir en stock. */
     public static final int ANIO_MINIMO = 1950;
