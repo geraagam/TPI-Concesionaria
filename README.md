@@ -15,8 +15,8 @@ que comercializa automóviles, camionetas y motocicletas, nuevas (0 Km) y usadas
 
 | Apellido y nombre | Legajo | Usuario de GitHub |
 |---|---|---|
-| Gamarra, Gerardo Andrés | 31300 | *(completar)* |
-| *(completar)* | | |
+| Gamarra, Gerardo Andrés | 31300 | *geraagam* |
+| Mierez, Antonella Belen |31270 |*antomierez* |
 | *(completar)* | | |
 
 ---

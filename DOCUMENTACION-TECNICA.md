@@ -15,8 +15,13 @@
 | Apellido y nombre | Legajo | Responsabilidad principal |
 |---|---|---|
 | Gamarra, Gerardo Andrés | 31300 | *(completar)* |
+<<<<<<< HEAD
 | *(completar)* | | |
 | Aquino, Leandro Miguel| | |
+=======
+| Mierez, Antonella Belen | 31270| *antomierez*|
+| *(completar)* | | |
+>>>>>>> 50d751c9d56fca392407adef9bf582df5752c0b0
 
 ---
 

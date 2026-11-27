@@ -9,13 +9,15 @@ Inteligencia Artificial Generativa (IAG) y Defensa Individual en Coloquio*.
 |---|---|
 | **Alumno** | Gamarra, Gerardo Andrés |
 | **Legajo** | 31300 |
-| **Comisión** | Comision 1.3 |
-| **IAG seleccionada** | Anthropic Claude |
+| **Comisión** | Comision 1.2 |
 
-> ⚠️ **Antes de entregar:** revisá que todo lo que figura acá coincida con tu experiencia
-> real. El punto 5 lo tenés que escribir vos: es una opinión personal y no puede
-> redactarla otro. En el coloquio te pueden preguntar por cualquier párrafo de este
-> informe.
+| | |
+|---|---|
+| **Alumno** | Mierez, Antonella Belen |
+| **Legajo** | 31270 |
+| **Comisión** | Comision 1.2 |
+
+| **IAG seleccionada** | Anthropic Claude |
 
 ---
 
@@ -28,8 +30,6 @@ Lenguaje (LLM), conforme al punto 2.a de la guía de cátedra.
 ---
 
 ## 2. Justificación técnica de la elección
-
-*(Punto 2.b de la guía. Ajustá este apartado a tus razones reales antes de entregarlo.)*
 
 La elección se fundamentó en cuatro criterios técnicos, evaluados frente a las
 alternativas gratuitas disponibles (ChatGPT en su versión gratuita, Google Gemini,
@@ -229,25 +229,12 @@ capacidad de generarlo.
 ## 5. Valoración crítica personal de la experiencia
 
 *(Punto 3.e de la guía.)*
+VALORACION PERSONAL: Mierez Antonella Belén
+Trabajar con IA fue una experiencia muy útil, porque nos ayudó a resolver dudas, desarrollar funciones y avanzar con el proyecto. Pero también aprendí que no se trata solamente de pedirle un código y copiarlo. Si uno no entiende lo que está haciendo, no tiene mucho sentido, porque después tampoco va a poder explicarlo ni defenderlo.
+También considero que es importante saber cómo pedirle las cosas, es decir, aprender a escribir buenos prompts y explicar claramente qué queremos lograr. En nuestro caso, Claude fue una herramienta muy intuitiva y nos facilitó bastante el trabajo, pero entendí que la IA tiene que adaptarse a lo que nosotros necesitamos y no al revés. Al final, somos nosotros quienes tenemos que revisar, comprender y hacer propio el trabajo.
 
-> **Este apartado lo tenés que escribir vos.** Es una opinión personal sobre tu propio
-> proceso de aprendizaje: nadie más puede redactarla con honestidad, y es muy probable
-> que te pregunten por ella en el coloquio. Borrá este recuadro y las preguntas guía
-> cuando escribas tu texto.
->
-> Preguntas que te pueden ayudar a ordenarlo:
->
-> - ¿Qué te resultó más difícil de entender del código, incluso teniéndolo escrito
->   adelante? ¿Genéricos? ¿El patrón método plantilla? ¿La separación en capas?
-> - ¿Hubo algún concepto que entendiste mejor *gracias* a tener que explicártelo, y
->   alguno que te quedó más débil justamente por no haberlo escrito vos?
-> - ¿Qué habrías hecho distinto si hubieras arrancado de cero sin asistencia? ¿Habrías
->   llegado a una arquitectura en capas, o a algo más simple?
-> - ¿Dónde ves el riesgo real de esta herramienta para alguien que recién empieza a
->   programar?
-> - ¿En qué situaciones la volverías a usar y en cuáles no?
->
-> Dos o tres párrafos honestos valen mucho más que una página de generalidades.
+
+
 
 ---
 
