@@ -17,7 +17,7 @@
 | Gamarra, Gerardo Andrés | 31300 | *(completar)* |
 <<<<<<< HEAD
 | *(completar)* | | |
-| Aquino, Leandro Miguel| | |
+| Aquino, Leandro Miguel| 31437 | |
 =======
 | Mierez, Antonella Belen | 31270| *antomierez*|
 | *(completar)* | | |
